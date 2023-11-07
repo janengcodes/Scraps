@@ -1,11 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scraps</title>
-</head>
-<body>
-    
-</body>
+    <nav>
+    <ul>
+        <a href="#home">Scraps</a>
+        <a href="#recipes">Recipes</a>
+        <a href="#ingredients">Ingredients</a>
+        <a href="#loginsignup">Login/Signup</a>
+      </ul>
+    </nav>
+  </head>
+  <body>
+    <h1>Pantry</h1>
+    <nav>
+      <li><a href="#dietary-restrictions">Dietary Restrictions</a></li>
+      <li><a href="#allergens">Dietary Restrictions</a></li>
+    </nav>
+
+    <p>Choose your ingredients:</p>
+
+    <div class="category">
+      <h2>Protein</h2>
+      <img class="cover-img" src="jinja" alt="protien picture" />
+      <form action="/pantry/" method="post" enctype="multipart/form-data">
+        <!-- use a form to show a checklist -->
+        {% for item in protein %}
+        <!-- tbd for restrictions -->
+        {% if condition %}
+        <li><input type="checkbox" name="ingredient" value="{{ item.id }}"> {{ item.name }} </li>
+        {% endif %}
+        <!-- end for means for loop has ended -->
+        {% endfor %}
+    </form> 
+    </div>
+    <div class="category">
+      <h2>Produce</h2>
+      <img class="cover-img" src="jinja" alt="produce picture" />
+      <form action="/pantry/" method="post" enctype="multipart/form-data">
+        <!-- use a form to show a checklist -->
+        {% for item in produce %}
+        <!-- tbd for restrictions -->
+        {% if condition %}
+        <li><input type="checkbox" name="ingredient" value="{{ item.id }}"> {{ item.name }} </li>
+        {% endif %}
+        <!-- end for means for loop has ended -->
+        {% endfor %}
+    </form> 
+    </div>
+    <div class="category">
+      <h2>Dairy</h2>
+      <img class="cover-img" src="jinja" alt="dairy picture" />
+      <form action="/pantry/" method="post" enctype="multipart/form-data">
+        <!-- use a form to show a checklist -->
+        {% for item in dairy %}
+        <!-- tbd for restrictions -->
+        {% if condition %}
+        <li><input type="checkbox" name="ingredient" value="{{ item.id }}"> {{ item.name }} </li>
+        {% endif %}
+        <!-- end for means for loop has ended -->
+        {% endfor %}
+    </form> 
+    </div>
+    <div class="category">
+      <h2>Grain</h2>
+      <img class="cover-img" src="jinja" alt="grain picture" />
+      <form action="/pantry/" method="post" enctype="multipart/form-data">
+        <!-- use a form to show a checklist -->
+        {% for item in grain %}
+        <!-- tbd for restrictions -->
+        {% if condition %}
+        <li><input type="checkbox" name="ingredient" value="{{ item.id }}"> {{ item.name }} </li>
+        {% endif %}
+        <!-- end for means for loop has ended -->
+        {% endfor %}
+    </form> 
+    </div>
+  </body>
 </html>

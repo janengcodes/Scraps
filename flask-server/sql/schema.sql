@@ -3,7 +3,7 @@ CREATE TABLE users(
     fullname VARCHAR(40) NOT NULL,
     email VARCHAR(40) NOT NULL,
     filename VARCHAR(64) NOT NULL,
-    password VARCHAR(256) NOT NULL,
+    password VARCHAR(40) NOT NULL,
     created DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(username)
 );
@@ -11,18 +11,51 @@ CREATE TABLE users(
 CREATE TABLE recipes(
     recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(64) NOT NULL,
-    ingredient_ids INTEGER[] NOT NULL,
-    instructions NVARCHAR(5000) NOT NULL
+    filename VARCHAR(64) NOT NULL,
+    ingredient_ids_json TEXT NOT NULL, /* JSON data */
+    instructions TEXT NOT NULL
+);
+
+CREATE TABLE saved_recipes(
+    username VARCHAR(20) NOT NULL,
+    recipe_id INTEGER NOT NULL,
+
+    FOREIGN KEY(username)
+        REFERENCES users(username)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY(recipe_id)
+        REFERENCES recipes(recipe_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE ingredients(
-    
+    ingredient_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(64) NOT NULL
+    /* TODO: Add more metadata */
 );
 
 CREATE TABLE pantry(
-    username VARCHAR(20) NOT NULL 
-    ingredient_id
+    username VARCHAR(20) NOT NULL,
+    ingredient_id INTEGER NOT NULL,
+    
     FOREIGN KEY(username)
         REFERENCES users(username)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE calendar_events(
+    event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username VARCHAR(20) NOT NULL,
+    recipe_id INTEGER NOT NULL,
+    created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    event_date DATETIME NOT NULL,
+    
+    FOREIGN KEY(username)
+        REFERENCES users(username)
+        ON DELETE CASCADE,
+    
+    FOREIGN KEY(recipe_id)
+        REFERENCES recipes(recipe_id)
         ON DELETE CASCADE
 );
